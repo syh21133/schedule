@@ -1,10 +1,12 @@
 package com.sparta.schedule.controller;
 
+import com.sparta.schedule.dto.PageDto;
 import com.sparta.schedule.dto.SchRequestDto;
 import com.sparta.schedule.dto.SchResponseDto;
 import com.sparta.schedule.entity.Schedule;
 import com.sparta.schedule.service.SchService;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -29,17 +31,27 @@ public class SchController {
         return schService.find();
     }
 
-    @GetMapping("/find/{id}")
-    public Schedule findByName(@PathVariable int id) {
-        return schService.findById(id);
+    @GetMapping("/find/{email}")
+    public Schedule findByEmail(@PathVariable String email) {
+        return schService.findByEmail(email);
     }
 
     @PutMapping("/update/{password}")
     public String updatePassword(@PathVariable String password, @RequestBody SchRequestDto schDto) {
         return schService.update(password,schDto);
     }
-    @DeleteMapping("/delete/{id}/{password}")
-    public int delete(@PathVariable int id, @PathVariable String password) {
-        return schService.delete(id,password);
+    @DeleteMapping("/delete/{email}/{password}")
+    public String delete(@PathVariable String email, @PathVariable String password) {
+        return schService.delete(email,password);
     }
+
+    @GetMapping("/page/{limit}/{offset}")
+    public List<SchResponseDto> page(@PathVariable int limit,@PathVariable int offset) {
+        return schService.page(limit,offset);
+    }
+
+
+
+
+
 }

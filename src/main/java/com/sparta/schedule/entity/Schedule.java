@@ -12,16 +12,17 @@ import java.util.Date;
 @NoArgsConstructor
 public class Schedule {
     private int id;
-    private String name;
+    private String email;
     private String todo;
     private String password;
     private String create_date;
     private String update_date;
+    private String name;
 
     public Schedule(SchRequestDto schDto) {
         this.id = schDto.getId();
     this.todo=schDto.getTodo();
-    this.name=schDto.getName();
+    this.email=schDto.getEmail();
     this.password=schDto.getPassword();
     this.create_date=schDto.getCreate_date();
     this.update_date=schDto.getUpdate_date();
@@ -30,7 +31,7 @@ public class Schedule {
     public void update(SchRequestDto schDto) {
         this.id=schDto.getId();
         this.todo=schDto.getTodo();
-        this.name=schDto.getName();
+        this.email=schDto.getEmail();
         this.password=schDto.getPassword();
         this.create_date=schDto.getCreate_date();
         this.update_date=schDto.getUpdate_date();

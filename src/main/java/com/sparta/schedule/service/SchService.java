@@ -1,5 +1,6 @@
 package com.sparta.schedule.service;
 
+import com.sparta.schedule.dto.PageDto;
 import com.sparta.schedule.dto.SchRequestDto;
 import com.sparta.schedule.dto.SchResponseDto;
 import com.sparta.schedule.entity.Schedule;
@@ -34,15 +35,15 @@ public class SchService {
         return schRepository.findAll();
     }
 
-    public Schedule findById(int id) {
-        return schRepository.findById(id);
+    public Schedule findByEmail(String email) {
+        return schRepository.findByEmail(email);
     }
 
     public String update(String password, SchRequestDto requsetDto) {
 
-        Schedule schedule = schRepository.findById(requsetDto.getId());
+        Schedule schedule = schRepository.findByEmail(requsetDto.getEmail());
         if(Objects.equals(password, schedule.getPassword())) {
-            schRepository.update(password,requsetDto);
+            schRepository.update(requsetDto);
             return password;
 
         }else{
@@ -53,15 +54,20 @@ public class SchService {
 
     }
 
-    public int delete(int id, String password) {
-        Schedule schedule = schRepository.findById(id);
+    public String delete(String email, String password) {
+        Schedule schedule = schRepository.findByEmail(email);
         if(Objects.equals(password, schedule.getPassword())) {
-            schRepository.delete(id);
-            return id;
+            schRepository.delete(email);
+            return email;
 
         }else{
             throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
         }
 
+    }
+
+
+    public List<SchResponseDto> page(int limit, int offset) {
+        return  schRepository.page(limit,offset);
     }
 }

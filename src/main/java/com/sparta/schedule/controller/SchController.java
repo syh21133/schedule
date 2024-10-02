@@ -24,7 +24,6 @@ public class SchController {
     public SchResponseDto createSch(@RequestBody SchRequestDto schDto) {
 
         return schService.createSch(schDto);
-
     }
     @GetMapping("/find")
     public List<SchResponseDto> findSch() {

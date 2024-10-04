@@ -21,7 +21,7 @@ public class SchRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-
+    // 일정생성
     public Schedule save(Schedule schedule) {
 
         String sql = "INSERT INTO schedule VALUES (default,?,?,?, default,default);";
@@ -30,7 +30,7 @@ public class SchRepository {
     return schedule;
     }
 
-
+    // 일정 조회
     public List<SchResponseDto> findAll() {
         String sql = "SELECT id,email,todo,create_date,update_date,user_name FROM schedule,user where schedule.email=user.user_email ORDER BY update_date DESC";
 
@@ -48,9 +48,8 @@ public class SchRepository {
         });
     }
 
+    // 이메일로 검색 조회
     public Schedule findByEmail(String email) {
-//        System.out.println(id);
-
 
         String sql = "SELECT * FROM schedule,user WHERE schedule.email = user.user_email AND schedule.email = ?";
 
@@ -74,6 +73,7 @@ public class SchRepository {
 
     }
 
+    // 일정 수정
     public void update(SchRequestDto schDto) {
 
         String sql = "UPDATE schedule SET todo = ? WHERE email = ?";
@@ -85,14 +85,14 @@ public class SchRepository {
 
     }
 
-
+    // 일정 삭제
     public void delete(String email) {
         String sql = "DELETE FROM schedule WHERE email = ?";
         jdbcTemplate.update(sql, email);
 
     }
 
-
+    // 페이징처리
     public List<SchResponseDto> page(int page, int limit) {
 
         int offset = limit * (page-1);

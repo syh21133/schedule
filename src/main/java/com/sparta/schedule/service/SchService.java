@@ -17,7 +17,7 @@ public class SchService {
     public SchService(SchRepository schRepository) {
         this.schRepository = schRepository;
     }
-
+    // 일정 생성
     public SchResponseDto createSch(SchRequestDto requsetDto) {
 
         Schedule schedule = new Schedule(requsetDto);
@@ -30,18 +30,20 @@ public class SchService {
         return schResponseDto;
     }
 
-
+    // 일정 조회
     public List<SchResponseDto> find() {
         return schRepository.findAll();
     }
-
+    // 이메일로 검색
     public Schedule findByEmail(String email) {
         return schRepository.findByEmail(email);
     }
-
+    // 일정 수정
     public String update(String password, SchRequestDto requsetDto) {
 
+
         Schedule schedule = schRepository.findByEmail(requsetDto.getEmail());
+        // 비밀번호 확인
         if(Objects.equals(password, schedule.getPassword())) {
             schRepository.update(requsetDto);
             return password;
@@ -53,9 +55,10 @@ public class SchService {
 
 
     }
-
+    // 일정삭제
     public String delete(String email, String password) {
         Schedule schedule = schRepository.findByEmail(email);
+        // 비밀번호 확인
         if(Objects.equals(password, schedule.getPassword())) {
             schRepository.delete(email);
             return email;

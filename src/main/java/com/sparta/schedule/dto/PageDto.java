@@ -7,5 +7,5 @@ import lombok.Setter;
 @Setter
 public class PageDto {
     private int limit;		// 한 페이지에 출력할 게시글 갯수
-    private int offset;     // 시작 행
+    private int page;       // 현재 페이지
 }

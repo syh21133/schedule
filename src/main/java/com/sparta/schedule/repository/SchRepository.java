@@ -25,7 +25,7 @@ public class SchRepository {
     public Schedule save(Schedule schedule) {
 
         String sql = "INSERT INTO schedule VALUES (default,?,?,?, default,default);";
-        jdbcTemplate.update(sql, schedule.getEmail(), schedule.getEmail(),schedule.getPassword());
+        jdbcTemplate.update(sql, schedule.getEmail(), schedule.getTodo(),schedule.getPassword());
 
     return schedule;
     }
@@ -79,7 +79,7 @@ public class SchRepository {
         String sql = "UPDATE schedule SET todo = ? WHERE email = ?";
         jdbcTemplate.update(sql, schDto.getTodo(), schDto.getEmail());
 
-        sql = "UPDATE user SET user_name = ? WHERE email = ?";
+        sql = "UPDATE user SET user_name = ? WHERE user_email = ?";
         jdbcTemplate.update(sql, schDto.getName(), schDto.getEmail());
 
 
@@ -93,9 +93,9 @@ public class SchRepository {
     }
 
 
-    public List<SchResponseDto> page(int limit, int offset) {
+    public List<SchResponseDto> page(int page, int limit) {
 
-        offset = limit * (offset-1);
+        int offset = limit * (page-1);
 
         String sql = "SELECT id,email,todo,create_date,update_date,user_name FROM schedule,user WHERE schedule.email = user.user_email limit ? offset ?";
 

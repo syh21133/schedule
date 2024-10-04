@@ -44,9 +44,9 @@ public class SchController {
         return schService.delete(email,password);
     }
 
-    @GetMapping("/page/{limit}/{offset}")
-    public List<SchResponseDto> page(@PathVariable int limit,@PathVariable int offset) {
-        return schService.page(limit,offset);
+    @GetMapping("/page/{page}/{limit}")
+    public List<SchResponseDto> page(@PathVariable int page,@PathVariable int limit) {
+        return schService.page(page,limit);
     }
 
 

@@ -67,7 +67,7 @@ public class SchService {
     }
 
 
-    public List<SchResponseDto> page(int limit, int offset) {
-        return  schRepository.page(limit,offset);
+    public List<SchResponseDto> page(int page, int limit) {
+        return  schRepository.page(page,limit);
     }
 }
